@@ -3,185 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¿Me perdonas? 💌</title>
+  <title>¿Me perdonas?</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
       height: 100vh;
-      font-family: "Poppins", sans-serif;
+      background: url('tu-imagen.png') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      color: white;
       overflow: hidden;
       position: relative;
     }
 
-    /* 🌇 Fondo con tu imagen difuminada */
+    /* Fondo difuminado */
     body::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: url("foto_matrimonio.jpeg") no-repeat center center/cover;
-      filter: blur(7px) brightness(0.6);
-      z-index: -2;
-    }
-
-    body::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      filter: blur(8px) brightness(0.6);
+      z-index: 0;
     }
 
     h1 {
-      font-size: 2.6rem;
-      margin-bottom: 15px;
-      font-weight: 700;
-      text-shadow: 2px 3px 12px rgba(0, 0, 0, 0.6);
-      animation: aparecer 2s ease both;
+      color: white;
+      font-size: 3rem;
+      z-index: 1;
+      text-shadow: 0 0 15px rgba(255,255,255,0.8);
+      margin-bottom: 50px;
+      text-align: center;
+      font-family: "Segoe UI", cursive;
     }
 
-    p {
-      max-width: 650px;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.45);
-    }
-
-    @keyframes aparecer {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .botones {
+    .buttons {
       display: flex;
-      gap: 20px;
-      position: relative;
+      gap: 60px;
+      z-index: 1;
     }
 
     button {
-      padding: 12px 26px;
+      font-size: 1.5rem;
+      padding: 15px 40px;
       border: none;
       border-radius: 30px;
-      font-size: 1.05rem;
       cursor: pointer;
-      transition: all 0.2s ease;
-      font-weight: 600;
-    }
-
-    #si {
-      background-color: #1db954;
-      color: white;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    #si:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    #no {
-      background-color: #ff4b5c;
-      color: white;
-      position: absolute;
-    }
-
-    /* Corazones animados */
-    .corazones {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .corazon {
-      position: absolute;
-      font-size: 20px;
-      animation: subir 6s linear infinite;
-      opacity: 0.85;
-    }
-
-    @keyframes subir {
-      0% { transform: translateY(100vh) scale(0.9); opacity: 1; }
-      100% { transform: translateY(-20vh) scale(1.4); opacity: 0; }
-    }
-
-    /* Mensaje final */
-    #mensaje-final {
-      display: none;
-      position: absolute;
-      top: 40%;
-      font-size: 2.2rem;
+      transition: 0.3s;
       font-weight: bold;
-      animation: brillar 1.5s infinite alternate;
-      text-shadow: 0 0 15px pink;
+      color: white;
     }
 
-    @keyframes brillar {
-      from { opacity: 0.8; transform: scale(1); }
-      to { opacity: 1; transform: scale(1.1); }
+    #yesBtn {
+      background-color: #ff4f81;
+      box-shadow: 0 0 15px #ff4f81;
     }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 2rem; }
-      p { font-size: 1rem; }
+    #yesBtn:hover {
+      transform: scale(1.1);
+      background-color: #ff6fa0;
+    }
+
+    #noBtn {
+      background-color: #444;
+      box-shadow: 0 0 10px #666;
+      position: absolute;
+    }
+
+    .mensaje {
+      position: absolute;
+      top: 25%;
+      font-size: 2rem;
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+      animation: aparecer 2s forwards;
+      text-shadow: 0 0 20px #fff;
+    }
+
+    @keyframes aparecer {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
-  <div class="corazones"></div>
-
-  <h1>¿Me perdonas? 💔</h1>
-  <p>
-    Sé que a veces puedo equivocarme, pero también sé que te amo con todo mi corazón.  
-    Hoy solo quiero una oportunidad para volver a verte sonreír. 💌
-  </p>
-
-  <div class="botones">
-    <button id="si">💚 Sí</button>
-    <button id="no">💔 No</button>
+  <h1>¿Me perdonas?</h1>
+  <div class="buttons">
+    <button id="yesBtn">Sí 💖</button>
+    <button id="noBtn">No 😢</button>
   </div>
 
-  <div id="mensaje-final">💞 Para toda la vida juntos, te amo 💞</div>
-
   <script>
-    const contenedor = document.querySelector(".corazones");
-    function crearCorazon() {
-      const c = document.createElement("div");
-      c.className = "corazon";
-      c.textContent = "💖";
-      c.style.left = Math.random() * 100 + "vw";
-      c.style.fontSize = 14 + Math.random() * 28 + "px";
-      c.style.animationDuration = 4 + Math.random() * 4 + "s";
-      contenedor.appendChild(c);
-      setTimeout(() => c.remove(), 8000);
-    }
-    setInterval(crearCorazon, 420);
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
 
-    const siBtn = document.getElementById("si");
-    const noBtn = document.getElementById("no");
-    const mensajeFinal = document.getElementById("mensaje-final");
-
-    siBtn.addEventListener("click", () => {
-      mensajeFinal.style.display = "block";
-      siBtn.style.display = "none";
-      noBtn.style.display = "none";
+    yesBtn.addEventListener("click", () => {
+      const mensaje = document.createElement("div");
+      mensaje.classList.add("mensaje");
+      mensaje.textContent = "Para toda la vida juntos, te amo ❤️";
+      document.body.appendChild(mensaje);
     });
 
     noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 20);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 20);
+      const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
     });
